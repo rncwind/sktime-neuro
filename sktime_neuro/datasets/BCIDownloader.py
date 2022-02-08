@@ -66,7 +66,6 @@ def prompted():
         print("BCI Requires a registration. Please register at http://bbci.de/competition/iv/ before use")
         print("For faster access. Set BCI_USERNAME and BCI_PASSWORD as environment variables")
         print("Please check your shell, or operating system manual for how to do this.")
-        print("")
         username = input("Enter username")
         password = input("Enter password")
         fetch_dataset(username, password, "BCICIV_4_mat.zip", memberLists["BCICIV_4"])
