@@ -4,8 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "==1.19.2"
-sktime = "*"
+numpy = "1.12.5"
+sktime = "0.10.1"
+scipy = "1.7.3"
 pytest = "*"
 pytest-cov = "*"
 flaky = "*"
@@ -16,6 +17,8 @@ pyedflib = "*"
 pooch = "*"
 matplotlib = "*"
 jupyter = "*"
+pyprep = "*"
+ipython = "==8.0.1"
 
 [dev-packages]
 
