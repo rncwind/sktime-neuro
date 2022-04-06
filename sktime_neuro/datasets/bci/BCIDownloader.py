@@ -4,7 +4,6 @@ from pooch import HTTPDownloader
 from typing import *
 import scipy.io
 import mne
-import pytest
 import logging
 
 bci_pooch = pooch.create(
@@ -98,11 +97,12 @@ def fetch_datasets_from_contest(contest, dataset_names: List[str], *, only_get_f
     un, passwd = fetch_un_pw()
     download = HTTPDownloader(auth=(un, passwd))
     unpack = pooch.Unzip(members=dataset_names)
-    fname = bci_pooch.fetch(contest, downloader=download, processor=unpack)
+    fname = bci_pooch.fetch((contest + ".zip"), downloader=download, processor=unpack)
     if only_get_filepaths is True:
         return fname
     else:
-        return extract_datasets(fname)
+        return extract_datasets([fname])
+
 
 def extract_datasets(fnames: List[str]):
     datasets = []
@@ -188,6 +188,7 @@ def test_fetch_contest_4():
         fp = fetch_contest("BCICIV_4_mat.zip")
         assert(fp is not None)
 
+
 def test_fetch_mat_dataset():
     import tempfile
     with tempfile.TemporaryDirectory() as td:
@@ -196,6 +197,7 @@ def test_fetch_mat_dataset():
         assert(ds is not None)
         assert(ds[0]["train_data"] is not None)
         assert(ds[0]["train_data"].shape == (400000, 62))
+
 
 def test_fetch_experiment_from_set_1():
     import tempfile
