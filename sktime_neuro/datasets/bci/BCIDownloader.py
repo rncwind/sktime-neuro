@@ -105,6 +105,7 @@ def fetch_datasets_from_contest(contest, dataset_names: List[str], *, only_get_f
 
 
 def extract_datasets(fnames: List[str]):
+    fnames = fnames[0]
     datasets = []
     for f in fnames:
         if f.endswith(".gdf"):
