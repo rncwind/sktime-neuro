@@ -26,7 +26,7 @@ rather than backporting the old detrender behaviour.
 class ColumnDetrender:
     """Just apply detrend to each column on it's own!"""
     def __init__(self, dataset: pd.DataFrame, forecaster = None):
-        self.dataset = dataset
+        self.dataset = dataset.T
         if forecaster is None:
             self.forecaster = PolynomialTrendForecaster(degree=1)
         else:
@@ -39,7 +39,7 @@ class ColumnDetrender:
         """
         if n_jobs is None:
             n_jobs = 1
-        processed_list = Parallel(n_jobs=n_jobs, verbose=10)(delayed(detrend_col)(values, deepcopy(self.forecaster)) for values in self.dataset.T)
+        processed_list = Parallel(n_jobs=n_jobs, verbose=10)(delayed(detrend_col)(values, self.forecaster) for values in self.dataset)
         con = np.concatenate(processed_list, axis=1)
         return con
 

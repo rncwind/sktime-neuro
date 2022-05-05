@@ -1,5 +1,10 @@
 # This may seem simple, but i repeat this a lot, so let's go with it.
 from pathlib import Path
 
+import dotenv
+from dotenv import load_dotenv
+import os
+
 def get_cache_dir():
-    return Path(__file__).parent.parent.parent / "cache"
+    dotenv.load_dotenv()
+    return Path(os.getenv("SKT_NEURO_CACHE_DIR"))

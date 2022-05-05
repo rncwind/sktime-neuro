@@ -16,7 +16,7 @@ pyedflib = "*"
 pooch = "*"
 matplotlib = "*"
 jupyter = "*"
-pyprep = "*"
+pyprep = {editable = true, ref = "master", git = "https://github.com/sappelhoff/pyprep.git"}
 ipython = "*"
 python-dotenv = "*"
 git-annex-adapter = "*"

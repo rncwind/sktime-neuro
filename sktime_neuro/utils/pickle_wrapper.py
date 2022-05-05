@@ -2,18 +2,19 @@
 # Pickle some data, with a name, and save it in cache.
 
 import pickle
+from sktime_neuro.utils.get_cache_dir import get_cache_dir
 from pathlib import Path
 import os
 
-def get_cache_dir():
-    return Path(__file__).parent.parent / "cache"
+def get_pickle_dir():
+    return get_cache_dir() / "pickled/"
 
 def get_filename(filename):
-    return get_cache_dir() / filename
+    return get_pickle_dir() / filename
 
 def serialise(data, filename):
     cachefilename = get_filename(filename)
-    with open(cachefilename, "wb") as outfile:
+    with open(cachefilename, "w+b") as outfile:
         pickle.dump(data, outfile)
 
 def deserialise(filename):

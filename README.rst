@@ -13,6 +13,11 @@ Documentation
 -------------
 To follow
 
+Environment Vars
+----------------
+For correct functionality, ensure that BCI_USERNAME,
+BCI_PASSWORD, SKT_NEURO_CACHE_DIR and PROJECT_ROOT are all set.
+
 Contributors
 ------------
 Tony Bagnall (@TonyBagnall)

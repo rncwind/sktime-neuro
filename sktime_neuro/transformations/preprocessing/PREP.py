@@ -1,5 +1,7 @@
 """
 This is a wrapper around pyprep that handles the general usecase for PREP
+As of 2022-05-02, this module REQUIRES the git version of pyprep. If you are using
+the pipenv files I wrote, this will be done by default.
 """
 
 import mne
@@ -35,6 +37,14 @@ def build_prep_params(mains_frequency: float, sample_rate: float, ref_channel: s
     return pp
 
 
+def prep_dataset(raw, params, outputPath, overwrite = False):
+    processed = do_prep(raw, params)
+    # This is horrible, BUT it's the only thing we can do if we wish to preserve
+    # the metadata of the structure.
+    raw._data = processed
+    raw.save(outputPath + ".fif", overwrite=overwrite)
+
+
 if __name__ == "__main__":
     datapath = mne.datasets.eegbci.load_data(subject=4, runs=1, update_path=True)
     fname_test_file = datapath[0]
@@ -43,5 +53,10 @@ if __name__ == "__main__":
     raw = mne.io.read_raw_edf(fname_test_file, preload=True)
     mne.datasets.eegbci.standardize(raw)
     pp = build_prep_params(60.0, raw.info["sfreq"], "eeg", None)
+    prep_dataset(raw, pp, "test")
 
-    processed = do_prep(raw, pp)
+    # processed = do_prep(raw, pp)
+    # print("A")
+    # raw._data = processed
+    # raw.save("test.fif")
+    # print("A")
