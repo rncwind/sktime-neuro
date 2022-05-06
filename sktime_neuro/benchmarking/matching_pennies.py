@@ -1,8 +1,11 @@
+import numpy as np
 from sklearn.model_selection import *
+from sktime.classification.kernel_based import RocketClassifier
 from sktime_neuro.datasets.matching_pennies_util import *
 from sktime_neuro.transformations.multivariate_detrender import ColumnDetrender
 from sktime_neuro.transformations.series_to_panel.eeg_epoching import epoch
 from sktime_neuro.utils.mne_processing import create_annotation
+from sktime_neuro.utils.get_cache_dir import get_cache_dir
 from sktime_neuro.datasets.matching_pennies_util import PENNIES_ONSET_LABELS, load_pickles
 from typing import *
 
@@ -42,6 +45,16 @@ def run_experiment(dataset: List[Tuple[np.ndarray, np.ndarray]], classifier, cv=
         results.append(scores)
     return results
 
+def write_results(results, prefix):
+    i = 0
+    for resultset in results:
+        fn = f"{prefix}_{i:02d}"
+        np.savetxt(fn, resultset, delimiter=",")
+        i += 1
+
 if __name__ == "__main__":
     allData = load_pickles("detrended")
     epochedSet = epoch_set(allData)
+    rocket = RocketClassifier(n_jobs=16)
+    results = run_experiment(epochedSet, rocket)
+    write_results(results, str((get_cache_dir() / "detrended_only")))

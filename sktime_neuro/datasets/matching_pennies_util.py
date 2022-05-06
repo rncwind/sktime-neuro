@@ -1,7 +1,9 @@
-from sktime_neuro.datasets.matching_pennies_util import *
 from sktime_neuro.transformations.multivariate_detrender import ColumnDetrender
 from sktime_neuro.transformations.series_to_panel.eeg_epoching import epoch
 from sktime_neuro.utils.mne_processing import create_annotation
+from sktime_neuro.utils.pickle_wrapper import *
+from mne_bids import BIDSPath, read_raw_bids
+from argparse import ArgumentParser
 
 PROBLEMNAME = "matchingpennies"
 PENNIES_ONSET_LABELS = ["raised-right/match-true", "raised-right/match-false",
