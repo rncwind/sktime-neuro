@@ -52,7 +52,7 @@ def detrend(data, n_jobs=1):
     return result
 
 
-def prep_for_pickle(sid):
+def put_up(sid):
     """noun: To perserve something, typically by canning or pickling"""
     raw = get_raw(sid)
     sf = raw.info['sfreq']
@@ -66,14 +66,14 @@ def prep_for_pickle(sid):
 def detrend_and_pickle_data():
     for i in range(5,12):
         # Data is pickled as a list of [labels, dataset, sampleRate]
-        topickle = prep_for_pickle(i)
+        topickle = put_up(i)
         name = f"matchingpennies_detrended_{i}"
         serialise(topickle, name)
 
 def detrend_epoch_pickle():
     for i in range(5, 12):
         # Data is pickled as a list of [labels, dataset, sampleRate]
-        topickle = prep_for_pickle(i)
+        topickle = put_up(i)
         topickle = epoch_dataset(topickle)
         name = f"matchingpennies_epoched_{i}"
         serialise(topickle, name)

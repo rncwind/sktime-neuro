@@ -8,3 +8,7 @@ import os
 def get_cache_dir():
     dotenv.load_dotenv()
     return Path(os.getenv("SKT_NEURO_CACHE_DIR"))
+
+def get_result_dir():
+    dotenv.load_dotenv()
+    return Path(os.getenv("PROJECT_ROOT")) / "experiment_results"

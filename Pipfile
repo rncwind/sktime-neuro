@@ -23,7 +23,8 @@ git-annex-adapter = "*"
 gitpython = "*"
 pandas = "*"
 sklearn = "*"
-sktime = {version = "==0.11.1", extras = ["all_extras"]}
+sktime = {version = "==0.11.3"}
+pyqt5 = "*"
 
 [dev-packages]
 # Full sktime dependency set
@@ -44,4 +45,4 @@ tsfresh = "0.17.0"
 tslearn = "0.5.2"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
